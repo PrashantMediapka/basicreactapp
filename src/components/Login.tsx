@@ -1,6 +1,7 @@
 import { useState , useEffect , useMemo } from "react"; 
 import { useNavigate } from "react-router-dom";
 import contextUser from './contextUser';
+import AzAuthLogin from "./AzAuthLogin";
 //creating a simple login component 
 
 const Login : React.FC = () => {
@@ -42,9 +43,13 @@ const Login : React.FC = () => {
             <button type="submit">Login</button><br/>
             </form>
             </div>
-            <br/>
+            <br/>                        
+
+            //Azure AD Login
+            <AzAuthLogin /> 
             </contextUser.Provider>
             );
+
         };
 
 
