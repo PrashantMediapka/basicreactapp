@@ -9,29 +9,20 @@ const Login : React.FC = () => {
     let [username, setUsername] = useState<string>('');
     let [password, setPassword] = useState<string>(''); 
 
-    function handleUsernameChange(event: React.ChangeEvent<HTMLInputElement>) {
-        setUsername(event.target.value);
-    }
- function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
-        setPassword(event.target.value);
-    }
-
 
     function submitForm(event: React.FormEvent) {
         event.preventDefault();
-        // Handle form submission logic here
-        console.log('Username:', username);
-        console.log('Password:', password);
+        //CLEAR ANY EXISITNG sTOARGE
+        localStorage.removeItem("user");
+
 
         if(username === "admin" && password === "admin") {
             alert("Login Successful");
-            //How to pass user data to another component after login
             //1. using Props in Navigate to pass data to another component
             navigate('home', {state: {user: username}});
 
             //set User in Local Storage
             localStorage.setItem("user", username);
-
 
             //useContext can also be used to pass data to another component
             setUsername(username);
@@ -42,16 +33,16 @@ const Login : React.FC = () => {
     }
 
     return (
-
-           <contextUser.Provider value={username}>
+           <contextUser.Provider value={username}> {/*This is for using useContext to pass data  to another component*/ }
             <div className="container">
-            <h2>Login Page</h2>
+            <h2>Forms Login Page</h2>
             <form  onSubmit={submitForm}><br/>
-            <input type="text" placeholder="Username" value={username} onChange={handleUsernameChange} /><br/>
-            <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} /><br/>
+            <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} /><br/>
+            <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} /><br/>
             <button type="submit">Login</button><br/>
             </form>
             </div>
+            <br/>
             </contextUser.Provider>
             );
         };

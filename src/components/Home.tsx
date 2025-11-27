@@ -6,6 +6,8 @@ import { useContext } from "react";
 import contextUser from './contextUser';
 import { useSelector } from 'react-redux';
 
+
+
 export interface HeaderProps {
     username: string;
  }
@@ -42,8 +44,16 @@ const Home : React.FC = () => {
         username: user
     };
 
-    useEffect(() => {  
-        getData();     
+    useEffect(() => {
+        
+        if(!user){
+            console.log("No user found, redirecting to login.");
+            window.location.href = '/';
+        }
+        else
+            {               
+             getData();
+            }     
     }, []);
 
     const getData = async () => {
@@ -75,7 +85,7 @@ const Home : React.FC = () => {
         <div>{txtFromChild} </div>
         <div><h3> Welcome to Home</h3></div>
         <br /> <br /> <br /> Home Redux Status : {status}<br /> <br />
-        <div>
+        <div style={{display:'flex', flexWrap:'wrap', justifyContent:'center',flexDirection:'row'}}>
             {products && products.length > 0 ? ( products.map((product) => (
                     <div key={product.id} style={{border: '1px solid black', margin: '10px', padding: '10px'}}>
                     <div>{product.title}</div>

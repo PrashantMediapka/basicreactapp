@@ -19,21 +19,26 @@ const updateReduxData = () => {
     console.log("Redux State Username:", status);
 }
 
+// Logoout 
+const logOut = () => {
+    localStorage.removeItem("user");
+    window.location.href = '/';
+}
+
     return (
         <div>
         <div style={{textAlign: "center"}}>            
             <div>Header Click Redux Status : {status}
                 <h1>Welcome,{headerProps.username} !</h1>               
             <div>
-                <div>
             <nav>
-                <ul>
-                    <li><Link to="/">Login</Link></li>
-                    <li><Link to="/home">Home</Link></li>   
+                <ul style={{ backgroundColor: 'lightgray', border: '1px solid black', display:'flex', justifyContent:'left', alignItems:'left',flexDirection:'row' }}>
+                    <li><Link to="/" style={{padding:'10px'}}>Login</Link></li>
+                    <li><Link to="/home" style={{padding:'10px'}}>Home</Link></li>  
+                     <li><input type='button' style={{padding:'10px'}} onClick={logOut} value="Logout" /></li>    
                 </ul>
             </nav>
-            </div>
-            </div>           
+            </div>          
        </div>
        <div>
          <input type="button" name="b1" onClick={sendData} value="PROPS : SendFromChildHeaderToParentHome" />  
