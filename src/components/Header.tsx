@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';        
 import { useDispatch , useSelector } from 'react-redux';
-import { setStatus } from '../redux-store/redux-homeSlice';
+import { setIsAuthenticated, setStatus } from '../redux-store/redux-homeSlice';
 
 const Header : React.FC<any> = ({headerProps, sendToParent}) => {
 
@@ -13,9 +13,12 @@ const Header : React.FC<any> = ({headerProps, sendToParent}) => {
 
 // Using Redux to get and update data in Header component
 const dispatch = useDispatch();
-const status = useSelector((state:any) => state.homeSlice.status);    
+const status = useSelector((state:any) => state.homeSlice.status);   
+const isAuthenticated = useSelector((state:any) => state.homeSlice.isAutheticated);//true
+
 const updateReduxData = () => {
     dispatch(setStatus('Loading...'));
+    dispatch(setIsAuthenticated(!isAuthenticated));
     console.log("Redux State Username:", status);
 }
 
